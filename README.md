@@ -14,6 +14,8 @@ cp .env.example .env   # then edit .env as needed
 docker compose up --build
 ```
 
+**Note: You must edit the database username and password fields within the .env file to match those specified in the docker_compose.yml file**
+
 Open: http://localhost:8080  (Currently only backend. Interact via postman)
 
 Postgres:
