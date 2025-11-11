@@ -1,0 +1,15 @@
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/FlightLogApplication.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/auth/AuthController.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/config/FlightsDataSourceConfig.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/config/UsersDataSourceConfig.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/flights/api/FlightController.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/flights/entity/Flight.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/flights/repository/FlightRepository.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/flights/service/EnrichmentService.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/flights/service/FlightService.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/security/JwtAuthFilter.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/security/JwtService.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/security/SecurityConfig.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/users/entity/AppUser.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/users/repository/AppUserRepository.java
+/home/user/Desktop/flightlog/backend/src/main/java/com/nrwall/flightlog/users/service/UserService.java

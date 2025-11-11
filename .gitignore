@@ -1,0 +1,5 @@
+#Ignore Local Environment Variables
+.env
+
+#Ignore Log Files
+log.txt

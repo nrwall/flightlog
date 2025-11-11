@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+# --- Custom app config
+app:
+  cors:
+    allowed-origin: 
+        ${FRONTEND_ORIGIN:http://localhost:5173}
+        "http://localhost:8080"
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:dev-secret-change-me}
+    expiration-minutes: ${JWT_EXP_MINUTES:120}
+
+# --- Datasource (two Postgres DBs)
+spring:
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    users:
+      url: ${USERS_DB_URL:jdbc:postgresql://localhost:5433/usersdb}
+      username: ${USERS_DB_USERNAME:flight_user}
+      password: ${USERS_DB_PASSWORD:flight_pass}
+    flights:
+      url: ${FLIGHTS_DB_URL:jdbc:postgresql://localhost:5434/flightsdb}
+      username: ${FLIGHTS_DB_USERNAME:flight_user}
+      password: ${FLIGHTS_DB_PASSWORD:flight_pass}
+logging:
+  level:
+    org.springframework.security: INFO

@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: flightlog/app:latest
+    container_name: flightlog-app
+    ports:
+      - "8080:8080"
+    environment:
+      # JWT / CORS
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXP_MINUTES=${JWT_EXP_MINUTES:-120}
+      - FRONTEND_ORIGIN=${FRONTEND_ORIGIN:-http://localhost:5173}
+      # Users DB
+      - USERS_DB_URL=jdbc:postgresql://${USERS_DB_HOST:-users-db}:${USERS_DB_PORT:-5432}/${USERS_DB_NAME:-usersdb}
+      - USERS_DB_USERNAME=${USERS_DB_USERNAME:-flight_user}
+      - USERS_DB_PASSWORD=${USERS_DB_PASSWORD:-flight_pass}
+      # Flights DB
+      - FLIGHTS_DB_URL=jdbc:postgresql://${FLIGHTS_DB_HOST:-flights-db}:${FLIGHTS_DB_PORT:-5432}/${FLIGHTS_DB_NAME:-flightsdb}
+      - FLIGHTS_DB_USERNAME=${FLIGHTS_DB_USERNAME:-flight_user}
+      - FLIGHTS_DB_PASSWORD=${FLIGHTS_DB_PASSWORD:-flight_pass}
+    depends_on:
+      - users-db
+      - flights-db
+
+  users-db:
+    image: postgres:16
+    container_name: flightlog-users-db
+    environment:
+      - POSTGRES_DB=${USERS_DB_NAME:-usersdb}
+      - POSTGRES_USER=${USERS_DB_USERNAME:-flight_user}
+      - POSTGRES_PASSWORD=${USERS_DB_PASSWORD:-flight_pass}
+    ports:
+      - "5433:5432"
+    volumes:
+      - users_data:/var/lib/postgresql/data
+
+  flights-db:
+    image: postgres:16
+    container_name: flightlog-flights-db
+    environment:
+      - POSTGRES_DB=${FLIGHTS_DB_NAME:-flightsdb}
+      - POSTGRES_USER=${FLIGHTS_DB_USERNAME:-flight_user}
+      - POSTGRES_PASSWORD=${FLIGHTS_DB_PASSWORD:-flight_pass}
+    ports:
+      - "5434:5432"
+    volumes:
+      - flights_data:/var/lib/postgresql/data
+
+volumes:
+  users_data:
+  flights_data:
