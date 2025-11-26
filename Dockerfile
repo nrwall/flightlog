@@ -1,3 +1,11 @@
+# -------- Frontend build (Vite) --------
+FROM node:20-bullseye AS frontend-builder
+WORKDIR /app/frontend
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+COPY frontend/ ./
+RUN npm run build
+
 # -------- Backend build (Spring Boot) --------
 FROM maven:3.9-eclipse-temurin-21 AS backend-builder
 WORKDIR /build
@@ -6,6 +14,9 @@ COPY backend/pom.xml ./backend/pom.xml
 RUN mvn -q -f backend/pom.xml -DskipTests dependency:go-offline
 # Copy backend sources
 COPY backend/ ./backend/
+# Copy built frontend into Spring's static resources before packaging
+RUN rm -rf backend/src/main/resources/static && mkdir -p backend/src/main/resources/static
+COPY --from=frontend-builder /app/frontend/dist/ ./backend/src/main/resources/static/
 # Package the app
 RUN mvn -q -f backend/pom.xml -DskipTests clean package spring-boot:repackage
 
