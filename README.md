@@ -47,7 +47,7 @@ When you submit a flight, the backend enriches it:
 - Flags `isRedEye` (overnight)
 - Builds a `route` string like `SFO→JFK`
 
-You can expand enrichment with external APIs later.
+Expansion of Enrichment with external APIs remains under consideration and research
 
 ## Security
 
@@ -62,8 +62,3 @@ You can expand enrichment with external APIs later.
 - Ownership is enforced by cross-record `userId` (no cross-DB foreign keys)
 
 ---
-
-### Production-ish notes
-
-- This template uses Hibernate `ddl-auto=update` to keep schema simple. For a stronger capstone, consider adding **Flyway** for per-DB migrations.
-- Add proper logging, metrics, and integration tests for greatness.
